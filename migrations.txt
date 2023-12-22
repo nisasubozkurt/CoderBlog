@@ -1,0 +1,7 @@
+dotnet ef --startup-project ../ProgrammersBlog.Mvc migrations add InitialCreate
+LAPTOP-TO0C5CS2
+
+dotnet ef --startup-project ../ProgrammersBlog.Mvc migrations add SeedingArticles
+
+dotnet ef --startup-project ../ProgrammersBlog.Mvc migrations database update
+
