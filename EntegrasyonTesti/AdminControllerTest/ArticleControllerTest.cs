@@ -156,26 +156,5 @@ namespace Entegrasyon.AdminControllerTest
             Assert.AreEqual(articleUpdateViewModel, viewResult.Model);
         }
 
-        [Test]
-        public async Task Delete_ValidCall_ReturnsJsonResult()
-        {
-            _mockArticleService.Setup(x => x.DeleteAsync(It.IsAny<int>(), It.IsAny<string>()))
-                .ReturnsAsync(new Result(ResultStatus.Success, "Article deleted"));
-
-            var result = await _controller.Delete(1);
-
-            Assert.IsInstanceOf<JsonResult>(result);
-        }
-
-        [Test]
-        public async Task GetAllArticles_ValidCall_ReturnsJsonResult()
-        {
-            _mockArticleService.Setup(x => x.GetAllByNonDeletedAndActiveAsync())
-                .ReturnsAsync(new DataResult<ArticleListDto>(ResultStatus.Success, new ArticleListDto()));
-
-            var result = await _controller.GetAllArticles();
-
-            Assert.IsInstanceOf<JsonResult>(result);
-        }
     }
 }

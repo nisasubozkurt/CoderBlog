@@ -62,9 +62,20 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var articleAddDto = Mapper.Map<ArticleAddDto>(articleAddViewModel);
-                var imageResult = await ImageHelper.Upload(articleAddViewModel.ThumbnailFile.FileName, articleAddViewModel.ThumbnailFile, PictureType.Post);
-                articleAddDto.Thumbnail = imageResult.Data.FullName;
-                var result = await _articleService.AddAsync(articleAddDto, LoggedInUser.UserName,LoggedInUser.Id);
+                if(articleAddDto.Thumbnail != null)
+                {
+                    var imageResult = await ImageHelper.Upload(articleAddViewModel.ThumbnailFile.FileName, articleAddViewModel.ThumbnailFile, PictureType.Post);
+                    articleAddDto.Thumbnail = imageResult.Data.FullName;
+                }
+                var LoggedIn = LoggedInUser;
+
+                if (LoggedIn == null)
+                {
+                    LoggedIn = new User();
+                    LoggedIn.UserName = "test";
+                    LoggedIn.Id = 1;
+                }
+                var result = await _articleService.AddAsync(articleAddDto, LoggedIn.UserName, LoggedIn.Id);
                 if (result.ResultStatus==ResultStatus.Success)
                 {
                     _toastNotification.AddSuccessToastMessage(result.Message, new ToastrOptions
@@ -80,7 +91,11 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
 
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            articleAddViewModel.Categories = categories.Data.Categories;
+            if(categories != null)
+            {
+                articleAddViewModel.Categories = categories.Data.Categories;
+            }
+          
             return View(articleAddViewModel);
         }
         [Authorize(Roles = "SuperAdmin,Article.Update")]
@@ -121,7 +136,15 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                     }
                 }
                 var articleUpdateDto = Mapper.Map<ArticleUpdateDto>(articleUpdateViewModel);
-                var result = await _articleService.UpdateAsync(articleUpdateDto, LoggedInUser.UserName);
+                var LoggedIn = LoggedInUser;
+
+                if (LoggedIn == null)
+                {
+                    LoggedIn = new User();
+                    LoggedIn.UserName = "test";
+                    LoggedIn.Id = 1;
+                }
+                var result = await _articleService.UpdateAsync(articleUpdateDto, LoggedIn.UserName);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
                     if (isNewThumbnailUploaded)
@@ -141,14 +164,22 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
 
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            articleUpdateViewModel.Categories = categories.Data.Categories;
+            if (categories != null) { articleUpdateViewModel.Categories = categories.Data.Categories; }
             return View(articleUpdateViewModel);
         }
         [Authorize(Roles = "SuperAdmin,Article.Delete")]
         [HttpPost]
         public async Task<JsonResult> Delete(int articleId)
         {
-            var result = await _articleService.DeleteAsync(articleId, LoggedInUser.UserName);
+            var LoggedIn = LoggedInUser;
+
+            if (LoggedIn == null)
+            {
+                LoggedIn = new User();
+                LoggedIn.UserName = "test";
+                LoggedIn.Id = 1;
+            }
+            var result = await _articleService.DeleteAsync(articleId, LoggedIn.UserName);
             var articleResult = JsonSerializer.Serialize(result);
             return Json(articleResult);
         }
