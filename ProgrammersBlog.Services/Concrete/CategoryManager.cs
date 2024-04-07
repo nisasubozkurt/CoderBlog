@@ -171,13 +171,13 @@ namespace ProgrammersBlog.Services.Concrete
                 category.IsActive = false;
                 category.ModifiedByName = modifiedByName;
                 category.ModifiedDate=DateTime.Now;
-                var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);
+                await UnitOfWork.Categories.UpdateAsync(category);
                 await UnitOfWork.SaveAsync();
-                return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Delete(deletedCategory.Name), new CategoryDto
+                return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Delete(category.Name), new CategoryDto
                 {
-                    Category = deletedCategory,
+                    Category = category,
                     ResultStatus = ResultStatus.Success,
-                    Message = Messages.Category.Delete(deletedCategory.Name)
+                    Message = Messages.Category.Delete(category.Name)
                 });
             }
             return new DataResult<CategoryDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: false), new CategoryDto

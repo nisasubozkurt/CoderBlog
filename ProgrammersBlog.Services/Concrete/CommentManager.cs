@@ -183,13 +183,14 @@ namespace ProgrammersBlog.Services.Concrete
                 comment.IsActive = false;
                 comment.ModifiedByName = modifiedByName;
                 comment.ModifiedDate = DateTime.Now;
-                var deletedComment = await UnitOfWork.Comments.UpdateAsync(comment);
-                article.CommentCount -= 1;
+                await UnitOfWork.Comments.UpdateAsync(comment);
+                if (article.CommentCount > 0) { }
+                    article.CommentCount -= 1;
                     await UnitOfWork.Articles.UpdateAsync(article);
                 await UnitOfWork.SaveAsync();
-                return new DataResult<CommentDto>(ResultStatus.Success, Messages.Comment.Delete(deletedComment.CreatedByName), new CommentDto
+                return new DataResult<CommentDto>(ResultStatus.Success, Messages.Comment.Delete(comment.CreatedByName), new CommentDto
                 {
-                    Comment = deletedComment,
+                    Comment = comment,
                 });
             }
             return new DataResult<CommentDto>(ResultStatus.Error, Messages.Comment.NotFound(isPlural: false), new CommentDto

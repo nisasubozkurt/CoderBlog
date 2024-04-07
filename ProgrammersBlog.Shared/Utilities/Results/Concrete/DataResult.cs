@@ -32,5 +32,9 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
         public string Message { get; }
         public Exception Exception { get; }
         public T Data { get; }
+
+        public bool? Success => throw new NotImplementedException();
+
+        bool? IResult.Success { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

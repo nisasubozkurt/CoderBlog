@@ -8,7 +8,7 @@ using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes;
 
 namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
 {
-   public class Result:IResult
+    public class Result : IResult
     {
         public Result(ResultStatus resultStatus)
         {
@@ -28,6 +28,7 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
         public ResultStatus ResultStatus { get; }
         public string Message { get; }
         public Exception Exception { get; }
+        public bool? Success { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         // new Result(ResultStatus.Error,exception.message,exception)
     }
 }

@@ -28,12 +28,17 @@ namespace ProgrammersBlog.Services.Concrete
             _userManager = userManager;
         }
 
+        public ArticleManager(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        {
+        }
+
         public async Task<IDataResult<ArticleDto>> GetAsync(int articleId)
         {
             var article = await UnitOfWork.Articles.GetAsync(a => a.Id == articleId,a=>a.User,a=>a.Category);
             if (article!=null)
             {
-                article.Comments = await UnitOfWork.Comments.GetAllAsync(c => c.ArticleId == articleId&&!c.IsDeleted&&c.IsActive);
+                if(article.CommentCount> 0)
+                    article.Comments = await UnitOfWork.Comments.GetAllAsync(c => c.ArticleId == articleId&&!c.IsDeleted&&c.IsActive);
                 return new DataResult<ArticleDto>(ResultStatus.Success,new ArticleDto
                 {
                     Article = article,
@@ -369,10 +374,16 @@ namespace ProgrammersBlog.Services.Concrete
 
         public async Task<IResult> AddAsync(ArticleAddDto articleAddDto, string createdByName, int userId)
         {
-            var article = Mapper.Map<Article>(articleAddDto);
+            var article = new Article();
             article.CreatedByName = createdByName;
             article.ModifiedByName = createdByName;
             article.UserId = userId;
+            article.Category = articleAddDto.Category;
+            article.Title = articleAddDto.Title;
+            article.Content = articleAddDto.Content;
+            article.CategoryId = articleAddDto.CategoryId;
+            article.SeoAuthor = articleAddDto.SeoAuthor;
+            article.Date = article.Date;
             await UnitOfWork.Articles.AddAsync(article);
             await UnitOfWork.SaveAsync();
             return new Result(ResultStatus.Success,Messages.Article.Add(article.Title));
@@ -459,6 +470,11 @@ namespace ProgrammersBlog.Services.Concrete
             {
                 return new DataResult<int>(ResultStatus.Error, $"Beklenmeyen bir hata ile karşılaşıldı.", -1);
             }
+        }
+
+        public Task AddAsync(Article article)
+        {
+            throw new NotImplementedException();
         }
     }
 }
