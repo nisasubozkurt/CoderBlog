@@ -38,7 +38,7 @@ namespace BirimTest.ServicesTest
             {
                 Email = "nisasubozkurt@gmail.com",
                 Subject = "Test Subject",
-                Message = "Test message"
+                Message = "Test başarılıdır."
             };
 
             var result = _mailManager.Send(emailSendDto);
@@ -55,7 +55,7 @@ namespace BirimTest.ServicesTest
                 Name = "Su Bozkurt",
                 Email = "nisasubozkurt@gmail.com",
                 Subject = "Contact Subject",
-                Message = "Contact message"
+                Message = "Sizinle İletişime geçmek istiyorum!"
             };
 
             var result = _mailManager.SendContactEmail(emailSendDto);

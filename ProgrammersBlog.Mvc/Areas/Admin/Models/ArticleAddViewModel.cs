@@ -19,7 +19,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Models
         [DisplayName("İçerik")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         [MinLength(20, ErrorMessage = "{0} alanı {1} karakterden küçük olmamalıdır.")]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         [DisplayName("Küçük Resim")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         public IFormFile ThumbnailFile { get; set; }

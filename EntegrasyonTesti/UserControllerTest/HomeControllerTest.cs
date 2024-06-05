@@ -72,19 +72,17 @@ namespace Entegrasyon.UserControllerTest
         }
 
         [Test]
-        public void Contact_Post_ValidModel_ReturnsView()
-        {
-            // Arrange
-            EmailSendDto emailSendDto = new EmailSendDto { Email = "test@example.com", Subject = "Test", Message = "Test message" };
+        public void Contact_Post_ValidModel_ReturnsView(){
+            EmailSendDto emailSendDto = new EmailSendDto { Email = "test@example.com",
+                                                           Subject = "Test", 
+                                                           Message = "Test message" };
             _mockMailService.Setup(service => service.SendContactEmail(It.IsAny<EmailSendDto>()))
-                            .Returns(new EmailSendResultDto { IsSuccessful = true, Message = "Success" });
-
-            // Act
+                            .Returns(new EmailSendResultDto { IsSuccessful = true, 
+                                                              Message = "Success" });
             var result = _controller.Contact(emailSendDto);
-
-            // Assert
             Assert.That(result, Is.TypeOf<ViewResult>());
-            _mockToastNotification.Verify(x => x.AddSuccessToastMessage(It.IsAny<string>(), It.IsAny<ToastrOptions>()), Times.Once);
+            _mockToastNotification.Verify(x => x.AddSuccessToastMessage(It.IsAny<string>(),
+                                               It.IsAny<ToastrOptions>()), Times.Once);
         }
     }
 

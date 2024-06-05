@@ -16,6 +16,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0-preview.3.24172.9" />
+    <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
   </ItemGroup>
 
   <ItemGroup>

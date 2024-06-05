@@ -46,15 +46,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var LoggedIn = LoggedInUser;
-
-                if (LoggedIn == null)
-                {
-                    LoggedIn = new User();
-                    LoggedIn.UserName = "test";
-                    LoggedIn.Id = 1;
-                }
-                var result = await _categoryService.AddAsync(categoryAddDto, LoggedIn.UserName);
+                var result = await _categoryService.AddAsync(categoryAddDto, LoggedInUser.UserName);
                 if (result.ResultStatus==ResultStatus.Success)
                 {
                     var categoryAddAjaxModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
@@ -92,15 +84,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var LoggedIn = LoggedInUser;
-
-                if (LoggedIn == null)
-                {
-                    LoggedIn = new User();
-                    LoggedIn.UserName = "test";
-                    LoggedIn.Id = 1;
-                }
-                var result = await _categoryService.UpdateAsync(categoryUpdateDto, LoggedIn.UserName);
+                var result = await _categoryService.UpdateAsync(categoryUpdateDto, LoggedInUser.UserName);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
                     var categoryUpdateAjaxModel = JsonSerializer.Serialize(new CategoryUpdateAjaxViewModel

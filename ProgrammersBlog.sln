@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirimTest", "BirimTest\Biri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntegrasyonTesti", "EntegrasyonTesti\EntegrasyonTesti.csproj", "{08308816-6CB4-4F82-A6E4-ED9B181F1F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veritabanı testi", "Veritabanı testi\Veritabanı testi.csproj", "{E91778F4-C8C4-4E55-BA57-E4C16E69EBD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veritabanı testi", "Veritabanı testi\Veritabanı testi.csproj", "{E91778F4-C8C4-4E55-BA57-E4C16E69EBD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FonksiyonellikTesti", "Fonksiyonellik testi\FonksiyonellikTesti.csproj", "{278CA5A6-E3A2-4B65-B1E5-86250BB4C3D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{E91778F4-C8C4-4E55-BA57-E4C16E69EBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91778F4-C8C4-4E55-BA57-E4C16E69EBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E91778F4-C8C4-4E55-BA57-E4C16E69EBD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278CA5A6-E3A2-4B65-B1E5-86250BB4C3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278CA5A6-E3A2-4B65-B1E5-86250BB4C3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278CA5A6-E3A2-4B65-B1E5-86250BB4C3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278CA5A6-E3A2-4B65-B1E5-86250BB4C3D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

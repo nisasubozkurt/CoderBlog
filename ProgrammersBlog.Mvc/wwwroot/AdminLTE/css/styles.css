@@ -11,34 +11,34 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: #007bff;
-  --indigo: #6610f2;
-  --purple: #6f42c1;
-  --pink: #e83e8c;
-  --red: #dc3545;
-  --orange: #fd7e14;
-  --yellow: #ffc107;
-  --green: #28a745;
-  --teal: #20c997;
-  --cyan: #17a2b8;
-  --white: #fff;
-  --gray: #6c757d;
-  --gray-dark: #343a40;
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --info: #17a2b8;
-  --warning: #ffc107;
-  --danger: #dc3545;
-  --light: #f8f9fa;
-  --dark: #343a40;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 *,
@@ -56,7 +56,9 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
+  width:100%;
 }
+
 
 body {
     margin: 0;
@@ -66,7 +68,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #00000059 !important;
+    background: radial-gradient(circle, rgba(5, 19, 64, 1) 1%, rgba(4, 15, 50, 1) 100%);
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -176,6 +178,10 @@ a:not([href]):hover {
   color: inherit;
   text-decoration: none;
 }
+
+/** birim test chart */
+
+/***/
 
 pre,
 code,
@@ -568,8 +574,6 @@ pre code {
 
 .container-fluid, .container-xl, .container-lg, .container-md, .container-sm {
   width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -599,6 +603,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  width: 100%;
 }
 
 .no-gutters {
@@ -4350,6 +4355,8 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .card > hr {
   margin-right: 0;
@@ -10024,8 +10031,7 @@ body {
 .container-md,
 .container-lg,
 .container-xl {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  
 }
 
 #layoutAuthentication {

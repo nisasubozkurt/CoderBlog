@@ -3,125 +3,250 @@
     Layout = "_Layout";
     ViewBag.Title = "Yönetim Paneli";
 }
-@*<h1 class="mt-4">Dashboard</h1>*@
-<ol class="breadcrumb mb-3 mt-2">
-    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
-    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Yönetim Paneli</a></li>
-</ol>
-<div class="row">
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-primary text-white mb-4">
-            <div class="card-body">Kategoriler (@Model.CategoriesCount)</div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Detaylar</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+    <div class="app-container">
+        <div class="app-main">
+            <div class="chart-row three">
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper">
+                            <h2>Birim</h2>
+                            <span id="count-birim">0 Test</span>
+                        </div>
+                        <div class="chart-svg">
+                            <svg viewBox="0 0 36 36" class="circular-chart pink">
+                                <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                                <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-birim"></path>
+                            <text x="18" y="20.35" class="percentage" id="output-birim">100%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper">
+                            <h2>Fonksiyonellik</h2>
+                        <span id="count-fonksiyonellik">0 test</span>
+                        </div>
+                        <div class="chart-svg">
+                            <svg viewBox="0 0 36 36" class="circular-chart blue">
+                                <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                                <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-fonksiyonellik"></path>
+                            <text x="18" y="20.35" class="percentage" id="output-fonksiyonellik">100%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper">
+                            <h2>Veritabanı</h2>
+                        <span id="count-veritabani">0 Test</span>
+                        </div>
+                        <div class="chart-svg">
+                            <svg viewBox="0 0 36 36" class="circular-chart orange">
+                                <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                                <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-veritabani"></path>
+                            <text x="18" y="20.35" class="percentage" id="output-veritabani">100%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper">
+                            <h2>Entegrasyon</h2>
+                            <span id="count-entegrasyon">0 Test</span>
+                        </div>
+                        <div class="chart-svg">
+                            <svg viewBox="0 0 36 36" class="circular-chart purple">
+                                <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                                <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-entegrasyon"></path>
+                                <text x="18" y="20.35" class="percentage" id="output-entegrasyon">100%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-warning text-white mb-4">
-            <div class="card-body">Makaleler (@Model.ArticlesCount)</div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Article" asp-action="Index">Detaylar</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            <div class="chart-row two">
+                <div class="chart-container-wrapper big">
+                    <div class="chart-container">
+                        <div class="chart-container-header">
+                            <h2>Kullanılabilir RAM Miktarı</h2>
+                        </div>
+                        <div class="line-chart">
+                            <canvas id="chart-ram"></canvas>
+                        </div>
+                        <div class="chart-data-details">
+                            <div class="chart-details-header"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container-wrapper small">
+                    <div class="chart-container">
+                        <div class="chart-container-header">
+                            <h2>Testler</h2>
+                        </div>
+                        <div class="acquisitions-bar">
+                            <span class="bar-progress birim" style="width:8%;"></span>
+                            <span class="bar-progress fonksiyonellik" style="width:10%;"></span>
+                            <span class="bar-progress veritabani" style="width:18%;"></span>
+                            <span class="bar-progress entegrasyon" style="width:64%;"></span>
+                        </div>
+                        <div class="progress-bar-info total-info">
+                            <span class="progress-type">Toplam Test Sayısı:</span>
+                            <span class="progress-amount total"></span>
+                        </div>
+                        <div class="progress-bar-info">
+                            <span class="progress-color birim"></span>
+                            <span class="progress-type">Birim</span>
+                            <span class="progress-amount birim">64%</span>
+                        </div>
+                        <div class="progress-bar-info">
+                            <span class="progress-color fonksiyonellik"></span>
+                            <span class="progress-type">Fonksiyonellik</span>
+                            <span class="progress-amount fonksiyonellik">18%</span>
+                        </div>
+                        <div class="progress-bar-info">
+                            <span class="progress-color veritabani"></span>
+                            <span class="progress-type">Veritabanı</span>
+                            <span class="progress-amount veritabani">10%</span>
+                        </div>
+                        <div class="progress-bar-info">
+                        <span class="progress-color entegrasyon"></span>
+                            <span class="progress-type">Entegrasyon</span>
+                            <span class="progress-amount entegrasyon">8%</span>
+                        </div>
+                </div>
+                    <div class="chart-container  chart-container-flex">
+                    <div class="chart-info-wrapper-RAM">
+                        <span>RAM Kullanımı</span>
+                        <h2 id="ram-total">Ram</h2>
+                        <h2 id="ram-used">Ram</h2>
+                    </div>
+                    <div class="chart-svg-ram">
+                        <svg viewBox="0 0 36 36" class="circular-chart purple">
+                            <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-ram"></path>
+                            <text id="output-ram" x="18" y="20.35" class="percentage"></text>
+                        </svg>
+                    </div>
+                </div>
+                </div>
             </div>
+            <div class="chart-row three">
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper-Python">
+                            <h2>Güvenlik Testi</h2>
+                            <span>Basitleştirilmiş BruteForce Attack</span>
+                        </div>
+                    <button id="guvenlikTest" class="test-button">Testi Başlat</button> <!-- Buton eklendi -->
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper-Python">
+                            <h2>Kullanılabilirlik Testi</h2>
+                            <span>Yorum yapma</span>
+                        </div>
+                    <button id="kullanilabilirlikTest" class="test-button">Testi Başlat</button> <!-- Buton eklendi -->
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper-Python">
+                            <h2>Bütünleşik Testi</h2>
+                            <span>Giriş yapma ve kategori ekleme</span>
+                        </div>
+                        <button id="butunlesiktest" class="test-button">Testi Başlat</button> <!-- Buton eklendi -->
+                    </div>
+                </div>
+                <div class="chart-container-wrapper">
+                    <div class="chart-container">
+                        <div class="chart-info-wrapper-Python">
+                            <h2>GUI Test</h2>
+                            <span>Site içerisinde gezinti</span>
+                        </div>
+                        <button id="GUITest" class="test-button">Testi Başlat</button> <!-- Buton eklendi -->
+                    </div>
+                </div>
         </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-success text-white mb-4">
-            <div class="card-body">Yorumlar (@Model.CommentsCount)</div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="Comment" asp-action="Index">Detaylar</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            <div class="chart-row two">
+                <div class="chart-container-wrapper big">
+                <div class="chart-container">
+                    <div class="chart-container-header">
+                        <h2>CPU</h2>
+                    </div>
+                    <div class="line-chart">
+                        <canvas id="chart-cpu"></canvas>
+                    </div>
+                    <div class="chart-data-details">
+                        <div class="chart-details-header"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-danger text-white mb-4">
-            <div class="card-body">Kullanıcılar (@Model.UsersCount)</div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="Admin" asp-controller="User" asp-action="Index">Detaylar</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <div class="chart-container-wrapper small">
+                    <div class="chart-container  chart-container-flex">
+                    <div class="chart-info-wrapper-RAM">
+                        <span>CPU Kullanımı</span>
+                        <h2 id="cpu-max">Max</h2>
+                        <h2 id="cpu-current">current</h2>
+                        <h2 id="cpu-min">Min</h2>
+                    </div>
+                    <div class="chart-svg-ram">
+                        <svg viewBox="0 0 36 36" class="circular-chart purple">
+                            <path class="circle-bg" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                  a 15.9155 15.9155 0 0 1 0 -31.831" id="stroke-active-cpu"></path>
+                            <text id="output-cpu" x="18" y="20.35" class="percentage"></text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="chart-container" id="cpu-usage-list">
+                    <div class="chart-container-header">
+                        <h2>Testler</h2>
+                    </div>
+                        <div class="progress-bar-info">
+                            <span class="cpu-name">CPU_0: </span>
+                            <span class="cpu-percent">64%</span>
+                        </div>
+                </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xl-6">
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-chart-area mr-1"></i>
-                Area Chart Örneği
             </div>
-            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-        </div>
     </div>
-    <div class="col-xl-6">
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-chart-bar mr-1"></i>
-                Bar Chart Örneği
-            </div>
-            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-        </div>
-    </div>
-</div>
-<div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1"></i>
-        Son Paylaşılan Makaleler
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="articlesTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Kategori</th>
-                    <th>Başlık</th>
-                    <th>Küçük Resim</th>
-                    <th>Tarih</th>
-                    <th>Okunma Sayısı</th>
-                    <th>Yorum Sayısı</th>
-                    <th>Aktif Mi?</th>
-                    <th>Silinmiş Mi?</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th>Kategori</th>
-                    <th>Başlık</th>
-                    <th>Küçük Resim</th>
-                    <th>Tarih</th>
-                    <th>Okunma Sayısı</th>
-                    <th>Yorum Sayısı</th>
-                    <th>Aktif Mi?</th>
-                    <th>Silinmiş Mi?</th>
-                </tr>
-                </tfoot>
-                <tbody>
-                @foreach (var article in Model.Articles.Articles)
-                {
-                    <tr>
-                        <td>@article.Id</td>
-                        <td>@article.Category.Name</td>
-                        <td>@article.Title</td>
-                        <td><img src="~/img/@article.Thumbnail" class="my-image-table" /></td>
-                        <td>@article.Date.ToShortDateString()</td>
-                        <td>@article.ViewCount</td>
-                        <td>@article.CommentCount</td>
-                        <td>@(article.IsActive ? "Evet" : "Hayır")</td>
-                        <td>@(article.IsDeleted ? "Evet" : "Hayır")</td>
-                    </tr>
-                }
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
 @section Scripts
 {
+    <script src="~/AdminLTE/assets/demo/lineChartRAM.js"></script>
+    <script src="~/AdminLTE/assets/demo/lineChartCPU.js"></script>
+    <script src="~/AdminLTE/assets/demo/progressBar.js"></script>
+    <script src="~/AdminLTE/assets/demo/TestCirclePercent.js"></script>
     <script src="~/AdminLTE/js/homeIndex.js" type="application/ecmascript"></script>
+    <script src="~/AdminLTE/js/pythonTestRun.js" type="application/ecmascript"></script>
+
 }

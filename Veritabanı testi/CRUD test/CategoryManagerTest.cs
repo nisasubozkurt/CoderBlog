@@ -87,18 +87,16 @@ namespace VeritabaniTesti.CRUDTest
         }
 
         [Test]
-        public async Task AddAsync_ValidCategory_ReturnCategoryDtoSuccessResult()
-        {
-            // Arrange
-            CategoryAddDto categoryAddDto = new CategoryAddDto { Name = "New Category", Description = "New Description" };
-            Category category = new Category { Id = 1, Name = categoryAddDto.Name, Description = categoryAddDto.Description };
+        public async Task AddAsync_ValidCategory_ReturnCategoryDtoSuccessResult(){
+            CategoryAddDto categoryAddDto = new CategoryAddDto { Name = "New Category", 
+                                                                 Description = "New Description" };
+            Category category = new Category { Id = 1, 
+                                               Name = categoryAddDto.Name, 
+                                               Description = categoryAddDto.Description };
             _mockMapper.Setup(x => x.Map<Category>(It.IsAny<CategoryAddDto>())).Returns(category);
-            _mockUnitOfWork.Setup(x => x.Categories.AddAsync(It.IsAny<Category>())).ReturnsAsync(category);
-
-            // Act
+            _mockUnitOfWork.Setup(x => x.Categories.AddAsync(It.IsAny<Category>()))
+                                                   .ReturnsAsync(category);
             var result = await _categoryManager.AddAsync(categoryAddDto, "TestUser");
-
-            // Assert
             Assert.That(result.ResultStatus, Is.EqualTo(ResultStatus.Success));
             Assert.That(result.Data.Category.Name, Is.EqualTo(categoryAddDto.Name));
         }

@@ -65,6 +65,14 @@ namespace Entegrasyon.AdminControllerTest
         [Test]
         public async Task Add_Post_ValidModel_ReturnsJson()
         {
+            var user = new User
+            {
+                Id = 1,
+                UserName = "test",
+                Email = "test@gmail.com"
+            };
+            _userManagerMock.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
             // Arrange
             var categoryAddDto = new CategoryAddDto { Name = "Test", Description = "Test Description" };
             _categoryServiceMock.Setup(service => service.AddAsync(It.IsAny<CategoryAddDto>(), It.IsAny<string>())).ReturnsAsync(new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto()));
@@ -105,9 +113,18 @@ namespace Entegrasyon.AdminControllerTest
         [Test]
         public async Task Update_Post_ValidModel_ReturnsJson()
         {
+            var user = new User
+            {
+                Id = 1,
+                UserName = "test",
+                Email = "test@gmail.com"
+            };
+            _userManagerMock.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
             // Arrange
             var categoryUpdateDto = new CategoryUpdateDto { Id = 1, Name = "Updated Test", Description = "Updated Description" };
-            _categoryServiceMock.Setup(service => service.UpdateAsync(It.IsAny<CategoryUpdateDto>(), It.IsAny<string>())).ReturnsAsync(new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto()));
+            _categoryServiceMock.Setup(service => service.UpdateAsync(It.IsAny<CategoryUpdateDto>(), It.IsAny<string>()))
+                .ReturnsAsync(new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto()));
 
             // Act
             var result = await _categoryController.Update(categoryUpdateDto);

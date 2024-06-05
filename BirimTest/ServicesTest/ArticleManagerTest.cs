@@ -94,16 +94,10 @@ namespace BirimTest.ServicesTest
         }
 
         [Test]
-        public async Task GetAllAsync_NoArticles_ReturnsError()
-        {
-            // Arrange
+        public async Task GetAllAsync_NoArticles_ReturnsError(){
             _mockUnitOfWork.Setup(u => u.Articles.GetAllAsync(null,
-                It.IsAny<Expression<Func<Article, object>>[]>())).ReturnsAsync(new List<Article>());
-
-            // Act
+            It.IsAny<Expression<Func<Article, object>>[]>())).ReturnsAsync(new List<Article>());
             var result = await _articleManager.GetAllAsync();
-
-            // Assert
             Assert.That(result.ResultStatus, Is.EqualTo(ResultStatus.Success));
         }
 

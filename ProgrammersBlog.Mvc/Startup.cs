@@ -65,6 +65,7 @@ namespace ProgrammersBlog.Mvc
                 options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
                 options.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
             });
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

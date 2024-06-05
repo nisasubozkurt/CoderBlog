@@ -62,20 +62,18 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var articleAddDto = Mapper.Map<ArticleAddDto>(articleAddViewModel);
-                if(articleAddDto.Thumbnail != null)
+                if(articleAddViewModel.ThumbnailFile!=null)
                 {
-                    var imageResult = await ImageHelper.Upload(articleAddViewModel.ThumbnailFile.FileName, articleAddViewModel.ThumbnailFile, PictureType.Post);
-                    articleAddDto.Thumbnail = imageResult.Data.FullName;
+                    var uploadedImageResult = await ImageHelper.Upload(articleAddViewModel.Title, articleAddViewModel.ThumbnailFile, PictureType.Post);
+                    articleAddDto.Thumbnail = uploadedImageResult.ResultStatus == ResultStatus.Success
+                        ? uploadedImageResult.Data.FullName
+                        : "postImages/defaultThumbnail.jpg";
                 }
-                var LoggedIn = LoggedInUser;
-
-                if (LoggedIn == null)
+                else
                 {
-                    LoggedIn = new User();
-                    LoggedIn.UserName = "test";
-                    LoggedIn.Id = 1;
+                    articleAddDto.Thumbnail = "postImages/defaultThumbnail.jpg";
                 }
-                var result = await _articleService.AddAsync(articleAddDto, LoggedIn.UserName, LoggedIn.Id);
+                var result = await _articleService.AddAsync(articleAddDto, LoggedInUser.UserName,LoggedInUser.Id);
                 if (result.ResultStatus==ResultStatus.Success)
                 {
                     _toastNotification.AddSuccessToastMessage(result.Message, new ToastrOptions
@@ -91,11 +89,8 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
 
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            if(categories != null)
-            {
+            if(articleAddViewModel.Categories!=null)
                 articleAddViewModel.Categories = categories.Data.Categories;
-            }
-          
             return View(articleAddViewModel);
         }
         [Authorize(Roles = "SuperAdmin,Article.Update")]
@@ -136,15 +131,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                     }
                 }
                 var articleUpdateDto = Mapper.Map<ArticleUpdateDto>(articleUpdateViewModel);
-                var LoggedIn = LoggedInUser;
-
-                if (LoggedIn == null)
-                {
-                    LoggedIn = new User();
-                    LoggedIn.UserName = "test";
-                    LoggedIn.Id = 1;
-                }
-                var result = await _articleService.UpdateAsync(articleUpdateDto, LoggedIn.UserName);
+                var result = await _articleService.UpdateAsync(articleUpdateDto, LoggedInUser.UserName);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
                     if (isNewThumbnailUploaded)
@@ -164,22 +151,15 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
 
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            if (categories != null) { articleUpdateViewModel.Categories = categories.Data.Categories; }
+            if (articleUpdateViewModel.Categories != null)
+                articleUpdateViewModel.Categories = categories.Data.Categories;
             return View(articleUpdateViewModel);
         }
         [Authorize(Roles = "SuperAdmin,Article.Delete")]
         [HttpPost]
         public async Task<JsonResult> Delete(int articleId)
         {
-            var LoggedIn = LoggedInUser;
-
-            if (LoggedIn == null)
-            {
-                LoggedIn = new User();
-                LoggedIn.UserName = "test";
-                LoggedIn.Id = 1;
-            }
-            var result = await _articleService.DeleteAsync(articleId, LoggedIn.UserName);
+            var result = await _articleService.DeleteAsync(articleId, LoggedInUser.UserName);
             var articleResult = JsonSerializer.Serialize(result);
             return Json(articleResult);
         }

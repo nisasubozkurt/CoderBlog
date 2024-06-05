@@ -56,7 +56,7 @@ namespace Entegrasyon.AdminControllerTest
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, "1"),
-                new Claim(ClaimTypes.Name, "username")
+                new Claim(ClaimTypes.Name, "test")
             }));
 
             _controller.ControllerContext = new ControllerContext
@@ -88,19 +88,23 @@ namespace Entegrasyon.AdminControllerTest
 
 
         [Test]
-        public async Task Add_ValidModelState_ReturnsRedirectToActionIndex()
-        {
+        public async Task Add_ValidModelState_ReturnsRedirectToActionIndex(){
             var articleAddViewModel = new ArticleAddViewModel
             {
                 Title = "Title",
                 Content = "content",
             };
+            var user = new User
+            {
+                Id = 1,
+                UserName = "test",
+                Email = "test@gmail.com"
+            };
+            _mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
             _mockMapper.Setup(x => x.Map<ArticleAddDto>(It.IsAny<ArticleAddViewModel>())).Returns(new ArticleAddDto());
             _mockArticleService.Setup(x => x.AddAsync(It.IsAny<ArticleAddDto>(), It.IsAny<string>(), It.IsAny<int>()))
                 .ReturnsAsync(new Result(ResultStatus.Success, "Article added"));
-
             var result = await _controller.Add(articleAddViewModel);
-
             Assert.IsInstanceOf<RedirectToActionResult>(result);
             var redirectToActionResult = result as RedirectToActionResult;
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
@@ -131,6 +135,14 @@ namespace Entegrasyon.AdminControllerTest
         [Test]
         public async Task Update_ValidModelState_ReturnsRedirectToActionIndex()
         {
+            var user = new User
+            {
+                Id = 1,
+                UserName = "test",
+                Email = "test@gmail.com"
+            };
+            _mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
             var articleUpdateViewModel = new ArticleUpdateViewModel();
             _mockMapper.Setup(x => x.Map<ArticleUpdateDto>(It.IsAny<ArticleUpdateViewModel>())).Returns(new ArticleUpdateDto());
             _mockArticleService.Setup(x => x.UpdateAsync(It.IsAny<ArticleUpdateDto>(), It.IsAny<string>()))
@@ -146,6 +158,14 @@ namespace Entegrasyon.AdminControllerTest
         [Test]
         public async Task Update_InvalidModelState_ReturnsViewWithModel()
         {
+            var user = new User
+            {
+                Id = 1,
+                UserName = "test",
+                Email = "test@gmail.com"
+            };
+            _mockUserManager.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
             _controller.ModelState.AddModelError("Error", "ModelState is invalid");
             var articleUpdateViewModel = new ArticleUpdateViewModel();
 

@@ -5,42 +5,57 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 15000,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
-        }
-      }],
+    type: 'bar',
+    data: {
+        labels: ["January", "March", "April", "May", "June"],
+        datasets: [
+            {
+                label: 'My First dataset',
+                backgroundColor: documentStyle.getPropertyValue('--cyan-500'),
+                borderColor: documentStyle.getPropertyValue('--cyan-500'),
+                data: [65, 59, 56, 55, 40]
+            },
+            {
+                label: 'My Second dataset',
+                backgroundColor: documentStyle.getPropertyValue('--gray-500'),
+                borderColor: documentStyle.getPropertyValue('--gray-500'),
+                data: [28, 48, 86, 27, 90]
+            }
+        ]
     },
-    legend: {
-      display: false
-    }
-  }
+    options: {
+        maintainAspectRatio: false,
+        aspectRatio: 0.8,
+        plugins: {
+            legend: {
+                labels: {
+                    color: textColor
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: textColorSecondary,
+                    font: {
+                        weight: 500
+                    }
+                },
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
+            },
+            y: {
+                ticks: {
+                    color: textColorSecondary
+                },
+                grid: {
+                    color: surfaceBorder,
+                    drawBorder: false
+                }
+            }
+        }
+    };
+}
 });
